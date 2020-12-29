@@ -3,7 +3,7 @@ import {AXIOS} from "@/http-commons";
 export default {
     state: {
         id: '',
-        id_card: '',
+        idCard: '',
         nameInst: '',
         nameOld: ''
     },
@@ -33,12 +33,12 @@ export default {
             this.nameInst = data.name
         },
         setDataForLoadInst(state, data) {
-            this.id_card = data.id_card
-            this.id = data.id_inst
+            this.idCard = data.idCard
+            this.id = data.idInst
         },
         setDataForUpdInst(state, data) {
-            this.id_card = data.id_card
-            this.id = data.id_inst
+            this.idCard = data.idCard
+            this.id = data.idInst
         }
     },
 
@@ -50,18 +50,13 @@ export default {
             await AXIOS.post('/create-inst/confirmed', {id: this.id, name: this.nameInst});
         },
         async getInstInfoFunc(ctx) {
-            // let response = await AXIOS.get('/inst-update/' + this.id_card + '/' + this.id + '/getInfo', );
-            await AXIOS.get('/inst-update/' + this.id_card + '/' + this.id + '/getInfo', ).then(res => {
-                // console.log(res.data)
+            await AXIOS.get('/inst-update/' + this.idCard + '/' + this.id + '/getInfo', ).then(res => {
                 ctx.commit("setNameInst", res.data);
             })
 
         },
         async updInstFunc() {
-            console.log('idCard' + this.id_card +
-                "\nOldName" + this.nameOld +
-                "\nNewName" + this.nameInst)
-            await AXIOS.post('/update-inst/confirmed', {id: this.id_card, oldName: this.nameOld, name: this.nameInst});
+            await AXIOS.post('/update-inst/confirmed', {id: this.idCard, oldName: this.nameOld, name: this.nameInst});
         }
     }
 

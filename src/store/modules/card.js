@@ -44,7 +44,7 @@ export default {
 
         setHeadline(state, data) {
             state.headLine = data.headline
-            state.id = data.id_card
+            state.id = data.idCard
         }
 
     },

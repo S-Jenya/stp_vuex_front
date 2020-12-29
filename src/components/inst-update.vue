@@ -34,8 +34,8 @@ export default {
   },
   async mounted() {
     this.setDataForLoadInst({
-      id_card: document.location.href.split('/')[4],
-      id_inst: document.location.href.split('/')[5]
+      idCard: document.location.href.split('/')[4],
+      idInst: document.location.href.split('/')[5]
     })
     await this.getInstInfoFunc().then(() => {
       this.name = this.getNameInstData
