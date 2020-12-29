@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
 import card from './modules/card'
+import institution from './modules/institut'
 
 Vue.use(Vuex);
 
@@ -9,6 +10,7 @@ export default new Vuex.Store({
     strict: true,
     modules: {
         user,
-        card
+        card,
+        institution
     }
 });

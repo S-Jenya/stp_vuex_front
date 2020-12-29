@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1>Добавить карточку</h1>
+    <h1>Новое учебное учреждение</h1>
     <form @submit.prevent="createNewCard()">
-      <input type="text" v-model="nameLine">
+      <input type="text" v-model="name" placeholder="Наименование">
       <button type="submit" class="btn btn-primary linkCard">Создать</button>
     </form>
   </div>
@@ -15,22 +15,22 @@ export default {
   name: 'App',
   data() {
     return {
-      nameLine: ''
+      name: ''
     }
   },
   methods: {
-    ...mapActions(['createCardFunc']),
-    ...mapMutations(["setDataCard"]),
+    ...mapActions(['createInstFunc']),
+    ...mapMutations(["setDataInst"]),
 
     createNewCard() {
-      console.log('Id:' + document.location.href.split('/')[4] + '\nheadLine: ' + this.nameLine)
-      this.setDataCard(
+      this.setDataInst(
           {
             id: document.location.href.split('/')[4],
-            nameLine: this.nameLine
+            name: this.name
           }
       );
-      this.createCardFunc();
+      this.createInstFunc();
+      this.$router.push('/user-info/' + document.location.href.split('/')[4])
     }
   }
 }
