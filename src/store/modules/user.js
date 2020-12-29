@@ -42,7 +42,6 @@ export default {
         async loadUsersList(ctx) {
             ctx.commit("clearUser");
             let response = await AXIOS.get('/user/getUsers');
-            // response.data.forEach(user => this.users.push(user))
             ctx.commit("fillUsers", response.data);
         },
 

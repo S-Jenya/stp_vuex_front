@@ -19,16 +19,16 @@
             <th>Действие</th>
           </tr>
           </thead>
-          <tr v-for="user in getUsers" :key="user.id_user">
-            <td>{{ user.id_user }}</td>
-            <td><a href="#"  @click="$router.push('/user-info/' + user.id_user)">{{ user.name }}</a></td>
+          <tr v-for="user in getUsers" :key="user.idUser">
+            <td>{{ user.idUser }}</td>
+            <td><a href=""  @click="$router.push('/user-info/' + user.idUser)">{{ user.name }}</a></td>
             <td>{{ user.password }}</td>
             <td>{{ user.role }}</td>
             <td data-label="Действие">
-              <form @submit.prevent="getInfoForUpd(user.id_user, user.name)">
+              <form @submit.prevent="getInfoForUpd(user.idUser, user.name)">
                 <button type="submit">Edit</button>
               </form>
-              <form @submit.prevent="deleteUser(user.id_user)">
+              <form @submit.prevent="deleteUser(user.idUser)">
                 <button type="submit">Delete</button>
               </form>
             </td>
@@ -36,6 +36,7 @@
         </table>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -64,12 +65,7 @@ export default {
     },
 
     showCards() {
-      // let id = event.target.parentNode.children[0].innerText
-      // console.log('Id user: ' + id)
-      // this.$store.dispatch("setId", {id: id});
-      // this.$store.dispatch("loadCardsInfo");
       location.href='/user-info/' + event.target.parentNode.children[0].innerText
-
     }
   } ,
   async mounted() {
