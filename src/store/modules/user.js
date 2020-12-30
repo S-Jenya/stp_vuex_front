@@ -3,6 +3,7 @@ import {AXIOS} from "@/http-commons";
 export default {
     state: {
         id: '',
+        idUserForUpd: '',
         login: '',
         password: '',
         role: '',
@@ -12,6 +13,16 @@ export default {
     getters: {
         getUsers(state) {
             return state.users;
+        },
+        getDataForUpd(state) {
+            let sUser = 0
+            state.users.forEach(user => {
+                if (user.idUser === state.idUserForUpd) {
+                    sUser = user
+                }
+            })
+            return sUser;
+
         }
     },
 
@@ -35,6 +46,9 @@ export default {
         delUser(state, user) {
             this.id = user.id
             this.login = user.login
+        },
+        setIdUserForUpd(state, data) {
+            state.idUserForUpd = data.id
         }
     },
 

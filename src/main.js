@@ -11,6 +11,7 @@ Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
 
+
 new Vue({
   store,
   router,

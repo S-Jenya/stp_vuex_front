@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import userList from './components/user-list'
+import createUser from './components/create-user'
+import updUser from './components/user-update'
 import cards from '@/components/user-info'
 import newCards from '@/components/card-create'
 import updCards from '@/components/card-update'
@@ -16,6 +18,16 @@ export default new Router({
             path: '/',
             name: 'App',
             component: userList
+        },
+        {
+            path: '/user-create',
+            name: 'createUser',
+            component: createUser
+        },
+        {
+            path: '/user-update',
+            name: 'updateUser',
+            component: updUser
         },
         {
             path: '/user-info/:id',

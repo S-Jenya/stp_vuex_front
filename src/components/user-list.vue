@@ -1,13 +1,14 @@
 <template>
+
+
   <div class="HelloWorld">
 
+
     <div class="container">
-      <h1>Добавить нового пользователя</h1>
-      <createUser/>
+      <h1>Список зарегистрированных пользователей</h1>
       <hr>
-      <h1>Обновить данные пользователя</h1>
-      <updUser/>
-      <h2 style="text-align: center; padding: 10px 10px;">Спасок пользователей</h2>
+      <button @click="$router.push('/user-create')" class="btn btn-primary linkCard">Новый пользователь</button>
+      <h2 style="text-align: center; padding: 10px 10px;">Список пользователей</h2>
       <div class="wrapper">
         <table class="table">
           <thead>
@@ -21,13 +22,11 @@
           </thead>
           <tr v-for="user in getUsers" :key="user.idUser">
             <td>{{ user.idUser }}</td>
-            <td><a href=""  @click="$router.push('/user-info/' + user.idUser)">{{ user.name }}</a></td>
+            <td><a href="" @click="$router.push('/user-info/' + user.idUser)">{{ user.name }}</a></td>
             <td>{{ user.password }}</td>
             <td>{{ user.role }}</td>
             <td data-label="Действие">
-              <form @submit.prevent="getInfoForUpd(user.idUser, user.name)">
-                <button type="submit">Edit</button>
-              </form>
+              <button @click="goUpdUser(user.idUser)" type="submit">Edit</button>
               <form @submit.prevent="deleteUser(user.idUser)">
                 <button type="submit">Delete</button>
               </form>
@@ -44,36 +43,38 @@
 
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex';
-import createUser from './create-user'
-import updUser from './user-update'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      isCreateUserVisible: false,
+      showModal: false,
+      modalText: ''
+    }
+  },
   computed: mapGetters(['getUsers']),
   methods: {
-    ...mapActions(['loadUsersList'], ['addUserFunc']),
-    ...mapMutations(["delUser"]),
+    ...mapActions(['loadUsersList']),
+    ...mapMutations(["delUser", "setIdUserForUpd"]),
 
     deleteUser(id) {
       this.delUser({id: id});
       this.$store.dispatch("delUserFunc");
     },
 
-    getInfoForUpd(id, name) {
-      document.getElementById("idForUpd").value = id;
-      document.getElementById("nameForUpd").value = name;
+    showCards() {
+      location.href = '/user-info/' + event.target.parentNode.children[0].innerText
     },
 
-    showCards() {
-      location.href='/user-info/' + event.target.parentNode.children[0].innerText
+    goUpdUser(id) {
+      this.setIdUserForUpd({id: id})
+      this.$router.push('/user-update')
     }
-  } ,
-  async mounted() {
-    this.loadUsersList();
+
   },
-  components: {
-    createUser,
-    updUser
+  async mounted() {
+    await this.loadUsersList();
   }
 }
 </script>

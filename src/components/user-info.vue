@@ -44,7 +44,7 @@
       </div>
     </ul>
 
-    <input type="submit" onclick="javascript:history.back(); return false;" value="Назад">
+    <button @click="goBack"  type="button" class="btn btn-secondary">Отмена</button>
   </div>
 </template>
 
@@ -72,6 +72,9 @@ export default {
       this.setDataInst({id: id, name: name})
       this.delInstFunc()
       this.loadCards(this.idUser)
+    },
+    goBack() {
+      this.$router.push('/')
     }
 
   },
